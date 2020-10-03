@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"github.com/AkihiroSuda/go-netfilter-queue"
-	"github.com/SaurusXI/protecc/filter"
 )
 
 func main() {
@@ -20,7 +19,7 @@ func main() {
 		select {
 		case p := <-packets:
 			fmt.Println(p.Packet)
-			getPacketInfo(p.Packet)
+			// getPacketInfo(p.Packet)
 			p.SetVerdict(netfilter.NF_ACCEPT)
 		}
 	}
