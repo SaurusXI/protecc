@@ -9,7 +9,7 @@ import (
 
 func Start() {
 	if err := ui.Init(); err != nil {
-		log.Fatalf("failed to initialize termui: %v", err)
+		log.Fatalf("failed to initialize tui: %v", err)
 	}
 	defer ui.Close()
 
@@ -26,6 +26,9 @@ func Start() {
 			switch e.ID {
 			case "q", "<C-c>":
 				return
+			default:
+				d.HandleUIEvent(e)
+				render(d.Draw())
 			}
 		case <-ticker:
 			render(d.Draw())
