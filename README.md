@@ -10,7 +10,7 @@ git clone [git@github.com:SaurusXI/protecc.git](https://github.com/SaurusXI/prot
 sudo iptables -A INPUT -j NFQUEUE --queue-num 0
 
 # Run the firewall to listen on packets on NFQUEUE
-go run src/main.go
+sudo go run src/main.go
 
 # To remove the iptables rule (optional) run
 sudo iptables -D INPUT -j NFQUEUE --queue-num 0
