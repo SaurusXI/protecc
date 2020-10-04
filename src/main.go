@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"github.com/AkihiroSuda/go-netfilter-queue"
+	"github.com/SaurusXI/protecc/src/tui"
 )
 
 func main() {
@@ -14,6 +15,7 @@ func main() {
 	defer nfq.Close()
 
 	packets := nfq.GetPackets()
+	tui.Start()
 
 	for true {
 		select {
