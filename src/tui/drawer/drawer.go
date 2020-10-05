@@ -9,16 +9,18 @@ import (
 )
 
 type Drawer struct {
-	list      *ld.Drawer
-	table     *td.Drawer
-	sparkline *sd.Drawer
+	list      		*ld.Drawer
+	table     		*td.Drawer
+	sparkline 		*sd.Drawer
+	packetChannel	chan []string
 }
 
-func New() *Drawer {
-	d := Drawer{nil, nil, nil}
-	d.list = ld.New()
-	d.table = td.New()
-	d.sparkline = sd.New()
+func New(pc chan []string) *Drawer {
+	d := Drawer{nil, nil, nil, nil}
+	d.list = ld.New(pc)
+	d.table = td.New(pc)
+	d.sparkline = sd.New(pc)
+	d.packetChannel = pc
 
 	return &d
 }

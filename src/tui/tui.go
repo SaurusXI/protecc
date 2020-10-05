@@ -14,7 +14,7 @@ func Start(packetChannel chan []string) {
 	}
 	defer ui.Close()
 
-	d := drawer.New()
+	d := drawer.New(packetChannel)
 	render(d.Initialize())
 
 	uiEvents := ui.PollEvents()

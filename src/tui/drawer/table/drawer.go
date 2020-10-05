@@ -6,7 +6,8 @@ import (
 )
 
 type Drawer struct {
-	item *widgets.Table
+	item 			*widgets.Table
+	packetChannel	chan []string
 }
 
 func (d Drawer) Draw() *widgets.Table {
@@ -28,6 +29,6 @@ func (d Drawer) AddRow(row []string) {
 	d.item.Rows = append(d.item.Rows, row)
 }
 
-func New() *Drawer {
-	return &Drawer{widgets.NewTable()}
+func New(pc chan []string) *Drawer {
+	return &Drawer{widgets.NewTable(), pc}
 }
