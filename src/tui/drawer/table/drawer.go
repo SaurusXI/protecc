@@ -25,7 +25,11 @@ func (d Drawer) Initialize() *widgets.Table {
 }
 
 func (d Drawer) AddRow(row []string) {
-	d.item.Rows = append(d.item.Rows, row)
+	if len(d.item.Rows) > 10 {
+		d.item.Rows = append(append(d.item.Rows[:1], d.item.Rows[2:]...), row)
+	} else {
+		d.item.Rows = append(d.item.Rows, row)
+	}
 }
 
 func New() *Drawer {
