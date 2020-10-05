@@ -4,6 +4,7 @@ import (
 	ui "github.com/gizak/termui/v3"
 )
 
+// HandleUIEvent - draws TUI according to UI event and returns Drawables that can be rendered
 func (d Drawer) HandleUIEvent(e ui.Event) []ui.Drawable {
 	switch e.ID {
 	case "j", "<Down>":
@@ -17,6 +18,7 @@ func (d Drawer) HandleUIEvent(e ui.Event) []ui.Drawable {
 	}
 }
 
+// Draws UI without changing any widgets
 func (d Drawer) drawWithoutUpdate() []ui.Drawable {
 	slg := d.sparkline.GetSLG()
 	l := d.list.Item
@@ -31,12 +33,12 @@ func (d Drawer) drawWithoutUpdate() []ui.Drawable {
 	}
 }
 
+// Draws UI by updating list widget only
 func (d Drawer) drawList() []ui.Drawable {
 	slg := d.sparkline.GetSLG()
 	l := d.list.Draw()
 	table := d.table.Item
 
-	// fmt.Println(slg.BorderBottom)
 	arrange(l, table, slg)
 
 	return []ui.Drawable {

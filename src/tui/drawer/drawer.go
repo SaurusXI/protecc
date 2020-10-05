@@ -8,6 +8,7 @@ import (
 	"github.com/gizak/termui/v3/widgets"
 )
 
+// Drawer that combines all widget drawers
 type Drawer struct {
 	list      		*ld.Drawer
 	table     		*td.Drawer
@@ -15,6 +16,7 @@ type Drawer struct {
 	packetChannel	chan []string
 }
 
+// New (constructor) for Drawer
 func New(pc chan []string) *Drawer {
 	d := Drawer{nil, nil, nil, nil}
 	d.list = ld.New(pc)
@@ -25,6 +27,7 @@ func New(pc chan []string) *Drawer {
 	return &d
 }
 
+// Initialize all widget Drawers and arrange 
 func (d Drawer) Initialize() []ui.Drawable {
 	slg := d.sparkline.Initialize()
 	l := d.list.Initialize()
@@ -39,6 +42,7 @@ func (d Drawer) Initialize() []ui.Drawable {
 	}
 }
 
+// Draw all widgets
 func (d Drawer) Draw() []ui.Drawable {
 	slg := d.sparkline.Draw()
 	l := d.list.Draw()
@@ -53,10 +57,7 @@ func (d Drawer) Draw() []ui.Drawable {
 	}
 }
 
-func (d Drawer) AddRow(row []string) {
-	d.table.AddRow(row)
-}
-
+// Arrange all widgets spatially
 func arrange(l *widgets.List, table *widgets.Table, slg *widgets.SparklineGroup) {
 	l.SetRect(0, 0, 50, 5)
 	slg.SetRect(50, 0, 100, 5)
