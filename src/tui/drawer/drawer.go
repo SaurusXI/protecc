@@ -1,16 +1,16 @@
 package drawer
 
 import (
+	ld "github.com/SaurusXI/protecc/src/tui/drawer/list"
+	sd "github.com/SaurusXI/protecc/src/tui/drawer/sparkline"
+	td "github.com/SaurusXI/protecc/src/tui/drawer/table"
 	ui "github.com/gizak/termui/v3"
 	"github.com/gizak/termui/v3/widgets"
-	ld "github.com/SaurusXI/protecc/src/tui/drawer/list"
-	td "github.com/SaurusXI/protecc/src/tui/drawer/table"
-	sd "github.com/SaurusXI/protecc/src/tui/drawer/sparkline"
 )
 
 type Drawer struct {
-	list *ld.Drawer
-	table *td.Drawer
+	list      *ld.Drawer
+	table     *td.Drawer
 	sparkline *sd.Drawer
 }
 
@@ -30,7 +30,7 @@ func (d Drawer) Initialize() []ui.Drawable {
 
 	arrange(l, table, slg)
 
-	return []ui.Drawable {
+	return []ui.Drawable{
 		slg,
 		l,
 		table,
@@ -44,11 +44,15 @@ func (d Drawer) Draw() []ui.Drawable {
 
 	arrange(l, table, slg)
 
-	return []ui.Drawable {
+	return []ui.Drawable{
 		slg,
 		l,
 		table,
 	}
+}
+
+func (d Drawer) AddRow(row []string) {
+	d.table.AddRow(row)
 }
 
 func arrange(l *widgets.List, table *widgets.Table, slg *widgets.SparklineGroup) {

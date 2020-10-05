@@ -1,13 +1,14 @@
 package tui
 
 import (
-	"time"
 	"log"
-	ui "github.com/gizak/termui/v3"
+	"time"
+
 	"github.com/SaurusXI/protecc/src/tui/drawer"
+	ui "github.com/gizak/termui/v3"
 )
 
-func Start() {
+func Start(packetChannel chan []string) {
 	if err := ui.Init(); err != nil {
 		log.Fatalf("failed to initialize tui: %v", err)
 	}
@@ -30,6 +31,8 @@ func Start() {
 				d.HandleUIEvent(e)
 				render(d.Draw())
 			}
+		case p := <-packetChannel:
+			d.AddRow(p)
 		case <-ticker:
 			render(d.Draw())
 		}

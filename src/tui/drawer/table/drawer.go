@@ -14,15 +14,19 @@ func (d Drawer) Draw() *widgets.Table {
 }
 
 func (d Drawer) Initialize() *widgets.Table {
-	d.item.Rows = [][]string {
-		[]string {"Src Port", "Dest Port", "Seq No.", "Data Offset", "Window", "Checksum", "Urgent"},
+	d.item.Rows = [][]string{
+		[]string{"Src IP", "Src Port", "Dest IP", "Dest Port", "Window", "Checksum"},
 	}
 	d.item.TextStyle = ui.NewStyle(ui.ColorWhite)
 	d.item.RowSeparator = true
 	d.item.FillRow = true
-	
+
 	return d.item
-}	
+}
+
+func (d Drawer) AddRow(row []string) {
+	d.item.Rows = append(d.item.Rows, row)
+}
 
 func New() *Drawer {
 	return &Drawer{widgets.NewTable()}

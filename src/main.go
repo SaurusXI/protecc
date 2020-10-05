@@ -3,8 +3,11 @@ package main
 import (
 	"fmt"
 	"log"
+	"strconv"
+
 	"github.com/AkihiroSuda/go-netfilter-queue"
 	"github.com/SaurusXI/protecc/src/tui"
+	"github.com/google/gopacket/layers"
 )
 
 func main() {
@@ -13,15 +16,25 @@ func main() {
 		log.Fatalln(err)
 	}
 	defer nfq.Close()
-
+	packetChannel := make(chan []string)
 	packets := nfq.GetPackets()
-	tui.Start()
-
+	go tui.Start(packetChannel)
+	fmt.Println("RAN")
 	for true {
 		select {
 		case p := <-packets:
-			fmt.Println(p.Packet)
-			// getPacketInfo(p.Packet)
+			ipLayer := p.Packet.Layer(layers.LayerTypeIPv4)
+			tcpLayer := p.Packet.Layer(layers.LayerTypeTCP)
+			tcp, _ := tcpLayer.(*layers.TCP)
+			ip, _ := ipLayer.(*layers.IPv4)
+			if tcp == nil || ip == nil {
+				p.SetVerdict(netfilter.NF_ACCEPT)
+				break
+			}
+
+			cols := []string{ip.SrcIP.String(), tcp.SrcPort.String(), ip.DstIP.String(), tcp.DstPort.String(), strconv.Itoa(int(tcp.Window)), strconv.Itoa(int(tcp.Checksum))}
+			packetChannel <- cols
+			// getPacketInfo(p.`Packet)
 			p.SetVerdict(netfilter.NF_ACCEPT)
 		}
 	}
