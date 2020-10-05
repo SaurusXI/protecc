@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"strconv"
 
@@ -19,7 +18,6 @@ func main() {
 	packetChannel := make(chan []string)
 	packets := nfq.GetPackets()
 	go tui.Start(packetChannel)
-	fmt.Println("RAN")
 	for true {
 		select {
 		case p := <-packets:
