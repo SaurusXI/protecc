@@ -31,8 +31,6 @@ func Start(packetChannel chan []string) {
 				d.HandleUIEvent(e)
 				render(d.Draw())
 			}
-		case p := <-packetChannel:
-			d.AddRow(p)
 		case <-ticker:
 			render(d.Draw())
 		}

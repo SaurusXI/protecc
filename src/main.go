@@ -15,7 +15,7 @@ func main() {
 		log.Fatalln(err)
 	}
 	defer nfq.Close()
-	packetChannel := make(chan []string)
+	packetChannel := make(chan []string, 100)
 	packets := nfq.GetPackets()
 	go tui.Start(packetChannel)
 	for true {

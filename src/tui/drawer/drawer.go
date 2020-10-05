@@ -18,8 +18,8 @@ type Drawer struct {
 func New(pc chan []string) *Drawer {
 	d := Drawer{nil, nil, nil, nil}
 	d.list = ld.New(pc)
-	d.table = td.New(pc)
 	d.sparkline = sd.New(pc)
+	d.table = td.New(pc)
 	d.packetChannel = pc
 
 	return &d

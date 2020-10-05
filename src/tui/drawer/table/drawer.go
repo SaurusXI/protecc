@@ -11,7 +11,14 @@ type Drawer struct {
 }
 
 func (d Drawer) Draw() *widgets.Table {
-	return d.item
+	for {
+		select {
+		case p := <- d.packetChannel:
+			d.AddRow(p)
+		default:
+			return d.item
+		}
+	}
 }
 
 func (d Drawer) Initialize() *widgets.Table {

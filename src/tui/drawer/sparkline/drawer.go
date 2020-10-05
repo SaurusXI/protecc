@@ -3,7 +3,7 @@ package sparkline
 import (
 	ui "github.com/gizak/termui/v3"
 	"github.com/gizak/termui/v3/widgets"
-	"math/rand"
+	// "math/rand"
 )
 
 type Drawer struct {
@@ -38,6 +38,6 @@ func New(pc chan []string) *Drawer {
 }
 
 func (d Drawer) getData() []float64 {
-	data := append(d.item.Data[1:], float64(len(d.packetChannel) + rand.Intn(25)))
+	data := append(d.item.Data[1:], float64(len(d.packetChannel)))
 	return data
 }
