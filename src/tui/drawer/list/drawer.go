@@ -6,26 +6,26 @@ import (
 )
 
 type Drawer struct {
-	item 			*widgets.List
+	Item 			*widgets.List
 	packetChannel 	chan []string
 }
 
 func (d Drawer) Draw() *widgets.List {
-	return d.item
+	return d.Item
 }
 
 func (d Drawer) Initialize() *widgets.List {
-	d.item.Title = "Filter By"
-	d.item.Rows = []string{
+	d.Item.Title = "Filter By"
+	d.Item.Rows = []string{
 		"[1] Source Port",
 		"[2] Destination Port",
 		"[3] Sequence Number",
 		"[4] Checksum",
 	}
-	d.item.TextStyle = ui.NewStyle(ui.ColorYellow)
-	d.item.WrapText = false
+	d.Item.TextStyle = ui.NewStyle(ui.ColorYellow)
+	d.Item.WrapText = false
 
-	return d.item
+	return d.Item
 }
 
 func New(pc chan []string) *Drawer {

@@ -3,31 +3,30 @@ package sparkline
 import (
 	ui "github.com/gizak/termui/v3"
 	"github.com/gizak/termui/v3/widgets"
-	// "math/rand"
 )
 
 type Drawer struct {
-	item 			*widgets.Sparkline
+	Item 			*widgets.Sparkline
 	packetChannel	chan []string
 }
 
 func (d Drawer) Draw() *widgets.SparklineGroup {
-	d.item.Data = d.getData()
+	d.Item.Data = d.getData()
 
-	d.item.LineColor = ui.ColorBlue
+	d.Item.LineColor = ui.ColorBlue
 
-	slg := widgets.NewSparklineGroup(d.item)
+	slg := widgets.NewSparklineGroup(d.Item)
 	slg.Title = "Traffic"
 
 	return slg
 }
 
 func (d Drawer) Initialize() *widgets.SparklineGroup {
-	d.item.Data = []float64{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+	d.Item.Data = []float64{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
-	d.item.LineColor = ui.ColorBlue
+	d.Item.LineColor = ui.ColorBlue
 
-	slg := widgets.NewSparklineGroup(d.item)
+	slg := widgets.NewSparklineGroup(d.Item)
 	slg.Title = "Traffic"
 
 	return slg
@@ -38,6 +37,13 @@ func New(pc chan []string) *Drawer {
 }
 
 func (d Drawer) getData() []float64 {
-	data := append(d.item.Data[1:], float64(len(d.packetChannel)))
+	data := append(d.Item.Data[1:], float64(len(d.packetChannel)))
 	return data
+}
+
+func (d Drawer) GetSLG() *widgets.SparklineGroup {
+	slg := widgets.NewSparklineGroup(d.Item)
+	slg.Title = "Traffic"
+
+	return slg
 }

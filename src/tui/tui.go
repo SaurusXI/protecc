@@ -28,8 +28,7 @@ func Start(packetChannel chan []string) {
 			case "q", "<C-c>":
 				return
 			default:
-				d.HandleUIEvent(e)
-				render(d.Draw())
+				render(d.HandleUIEvent(e))
 			}
 		case <-ticker:
 			render(d.Draw())
