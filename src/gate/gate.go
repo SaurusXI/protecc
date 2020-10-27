@@ -1,4 +1,4 @@
-package filter
+package gate
 
 type Gate int
 
