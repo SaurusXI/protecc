@@ -1,11 +1,10 @@
 package src_ip
 
 import (
-	"github.com/SaurusXI/protecc/src/filter"
-	"net"
+	"github.com/SaurusXI/protecc/src/gate"
 )
 
 type Config struct {
-	setting filter.Gate
-	allowed []net.IP
+	Setting gate.Gate
+	Blocked map[string]bool
 }
