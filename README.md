@@ -1,4 +1,4 @@
-# protecc
+# walls
 Firewall with TUI using netfilter-queue Golang bindings.
 
 ### To run the project
